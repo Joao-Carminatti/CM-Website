@@ -1,0 +1,283 @@
+@import "tailwindcss";
+
+/*
+ * DESIGN TOKENS — PALETA PROVISÓRIA
+ * Troque os valores abaixo quando a identidade visual for definida
+ * (veja BRANDING.md). Contrastes AA validados:
+ * paper/ink 15.1 · stone/paper 6.0 · bronze/ink 6.4 · bronze-deep/paper 5.2
+ */
+@theme {
+  --color-ink: #0f1d2e; /* azul-noite: fundos escuros e texto principal */
+  --color-ink-soft: #182a40; /* superfícies sobre o ink */
+  --color-paper: #f3f1ec; /* off-white quente: fundo padrão */
+  --color-paper-deep: #e8e5de; /* superfícies sobre o paper */
+  --color-stone: #5b5c58; /* cinza-pedra: texto secundário sobre paper */
+  --color-mist: #a9b1bc; /* texto secundário sobre ink */
+  --color-bronze: #b79a6a; /* acento sobre ink */
+  --color-bronze-deep: #7d5f2e; /* acento sobre paper (texto/links) */
+  --color-line: #d4d0c7; /* linhas e bordas sobre paper */
+
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 14px;
+
+  --shadow-lift: 0 18px 40px -24px rgb(15 29 46 / 0.45);
+
+  --container-page: 76rem;
+  --ease-out-quint: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@theme inline {
+  --font-display: var(--font-newsreader), Georgia, "Times New Roman", serif;
+  --font-sans: var(--font-hanken), system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+
+html {
+  scroll-padding-top: 5rem;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  background: var(--color-paper);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  line-height: 1.6;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection {
+  background: var(--color-bronze);
+  color: var(--color-ink);
+}
+
+/* Foco sempre visível (teclado) */
+:focus-visible {
+  outline: 2px solid var(--color-bronze-deep);
+  outline-offset: 3px;
+  border-radius: var(--radius-sm);
+}
+.on-dark :focus-visible {
+  outline-color: var(--color-bronze);
+}
+
+/* Largura padrão de conteúdo */
+.page-width {
+  width: 100%;
+  max-width: var(--container-page);
+  margin-inline: auto;
+  padding-inline: clamp(1.25rem, 4vw, 2.5rem);
+}
+
+/* Movimento reduzido: tudo estático */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ==========================================================================
+   ANIMAÇÕES ASSINATURA (só transform, opacity, clip-path, stroke-dashoffset)
+   Tudo em CSS: zero JavaScript no scroll ou no carregamento.
+   ========================================================================== */
+
+/* 1. Título em linhas mascaradas que sobem (text reveal) */
+@keyframes line-up {
+  from {
+    transform: translateY(105%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+.reveal-line {
+  display: block;
+  overflow: hidden;
+  padding-bottom: 0.14em;
+  margin-bottom: -0.14em;
+}
+.reveal-line > span {
+  display: block;
+  animation: line-up 900ms var(--ease-out-quint) both;
+  animation-delay: calc(var(--i, 0) * 120ms + 150ms);
+}
+
+/* 2. Painel do hero revelado por clip-path */
+@keyframes panel-reveal {
+  from {
+    clip-path: inset(0 0 0 100%);
+  }
+  to {
+    clip-path: inset(0 0 0 0);
+  }
+}
+.hero-panel {
+  animation: panel-reveal 1100ms var(--ease-out-quint) 100ms both;
+}
+
+/* 3. Traço de projeto desenhado (SVG com pathLength="1") */
+@keyframes draw {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+.draw path {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  animation: draw 2400ms cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  animation-delay: calc(500ms + var(--i, 0) * 180ms);
+}
+
+/* 4. Linha do tempo que preenche com o scroll (scroll-driven, sem JS).
+   Fallback (sem suporte ou movimento reduzido): linha já preenchida. */
+@keyframes timeline-fill {
+  to {
+    transform: scaleY(1);
+  }
+}
+.timeline-fill {
+  transform-origin: top;
+}
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .timeline-fill {
+      transform: scaleY(0);
+      animation: timeline-fill linear both;
+      animation-timeline: view();
+      animation-range: entry 25% cover 60%;
+    }
+  }
+}
+
+/* 5. Zoom lento da mídia dos cards (só com mouse; touch não depende de hover) */
+.zoom-media > * {
+  transition: transform 1200ms var(--ease-out-quint);
+}
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  .group:hover .zoom-media > * {
+    transform: scale(1.05);
+  }
+}
+
+/* Versão simplificada no mobile: sem painel nem desenho animado */
+@media (max-width: 767px) {
+  .hero-panel {
+    display: none;
+  }
+  .draw path {
+    animation: none;
+    stroke-dashoffset: 0;
+  }
+}
+
+/* Movimento reduzido: versão estática de tudo */
+@media (prefers-reduced-motion: reduce) {
+  .draw path {
+    animation: none;
+    stroke-dashoffset: 0;
+  }
+  .reveal-line > span,
+  .hero-panel {
+    animation: none;
+  }
+}
+
+/* Coração: preenche e redesenha o contorno ao favoritar */
+.heart path {
+  transition: fill 300ms ease;
+}
+.heart[data-on="true"] path {
+  fill: var(--color-bronze-deep);
+  stroke-dasharray: 1;
+  animation: draw 550ms var(--ease-out-quint) both;
+}
+@keyframes draw-from {
+  from {
+    stroke-dashoffset: 1;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+.heart[data-on="true"] path {
+  animation-name: draw-from;
+}
+
+/* Entrada escalonada dos cards (filtros/paginação) */
+@keyframes card-in {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .card-enter {
+    animation: card-in 450ms var(--ease-out-quint) both;
+    animation-delay: calc(min(var(--i, 0), 6) * 55ms);
+  }
+}
+
+/* Troca de foto no lightbox */
+@keyframes foto-in {
+  from {
+    opacity: 0;
+    transform: scale(0.985);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .foto-enter {
+    animation: foto-in 280ms var(--ease-out-quint) both;
+  }
+}
+
+/* Transição de página nativa (View Transitions): a foto do card "viaja" até a galeria.
+   Progressive enhancement: sem suporte do navegador, a navegação é normal. */
+::view-transition-group(.morph) {
+  animation-duration: 500ms;
+  animation-timing-function: var(--ease-out-quint);
+}
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-group(*),
+  ::view-transition-old(*),
+  ::view-transition-new(*) {
+    animation: none !important;
+  }
+}
+
+/* Spotlight que acompanha o cursor (variáveis atualizadas por PointerEffects) */
+[data-spotlight]::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0;
+  background: radial-gradient(
+    220px circle at var(--mx, 50%) var(--my, 50%),
+    rgb(183 154 106 / 0.28),
+    transparent 70%
+  );
+  transition: opacity 400ms ease;
+}
+@media (hover: hover) and (pointer: fine) {
+  [data-spotlight]:hover::after {
+    opacity: 1;
+  }
+  [data-magnetic] {
+    transition:
+      transform 350ms var(--ease-out-quint),
+      background-color 200ms;
+  }
+}
