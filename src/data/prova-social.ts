@@ -25,5 +25,10 @@ export const depoimentos: Depoimento[] = [
     texto: "Outro relato.",
     contexto: "Vendeu uma casa em Bairro Y",
   },
+  {
+    nome: "João Little",
+    texto: "Muito satisfeito com a compra da minha mansão com o cleiton, ele me ajudou em tudo e me deu ótimas dicas.",
+    contexto: "Comprou uma mansão no Bairro palhoça",
+  },
 ];
 export const indicadores: Indicador[] = [];
