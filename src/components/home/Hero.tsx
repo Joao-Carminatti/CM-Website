@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { siteConfig } from "@/config/site";
 import { buildWhatsAppLink, mensagemPadrao } from "@/lib/whatsapp";
 import { HeroSearch } from "./HeroSearch";
@@ -53,20 +54,24 @@ function SkylineDraw() {
 }
 
 export function Hero({ locais }: { locais: string[] }) {
-  const linhas = [
-    "Seu próximo imóvel,",
-    "com alguém ao seu lado",
-    "da visita à escritura.",
-  ];
+  const foto = siteConfig.heroImagem;
+  const comFoto = Boolean(foto.src);
+  const linhas = ["Seu próximo imóvel,", "com alguém ao seu lado", "da visita à escritura."];
 
   return (
     <section className="on-dark bg-ink text-paper relative isolate overflow-hidden">
-      {/* Painel decorativo revelado por clip-path (só desktop) */}
-      <div
-        aria-hidden="true"
-        className="hero-panel from-ink-soft to-ink absolute inset-y-0 right-0 -z-10 hidden w-[42%] bg-gradient-to-br md:block"
-      />
-      <SkylineDraw />
+      {comFoto ? (
+        <div className="absolute inset-0 -z-10">
+          <Image src={foto.src} alt={foto.alt} fill priority sizes="100vw" className="object-cover" />
+          <div className="from-ink/90 via-ink/80 to-ink/70 absolute inset-0 bg-gradient-to-b" />
+        </div>
+      ) : (
+        <div
+          aria-hidden="true"
+          className="hero-panel from-ink-soft to-ink absolute inset-y-0 right-0 -z-10 hidden w-[42%] bg-gradient-to-br md:block"
+        />
+      )}
+      {!comFoto && <SkylineDraw />}
 
       <div className="page-width relative pt-16 pb-44 md:pt-24 md:pb-60">
         <h1 className="font-display max-w-3xl text-[2.6rem] leading-[1.08] font-medium tracking-tight sm:text-6xl lg:text-7xl">
@@ -77,7 +82,7 @@ export function Hero({ locais }: { locais: string[] }) {
           ))}
         </h1>
 
-        <p className="text-mist mt-8 max-w-xl text-lg">
+        <p className={`${comFoto ? "text-paper" : "text-mist"} mt-8 max-w-xl text-lg`}>
           Imóveis à venda e lançamentos em {siteConfig.regiao}, com atendimento direto do
           corretor {siteConfig.nome}.
         </p>

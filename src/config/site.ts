@@ -20,6 +20,11 @@ export const siteConfig = {
     facebook: "",
     youtube: "",
   },
+  /**
+   * Foto de fundo do hero da Home. Deixe src vazio para usar o fundo azul.
+   * Salve o arquivo em public/. Use foto horizontal, ~2400 px de largura, até ~400 KB.
+   */
+  heroImagem: { src: "/hero.jpg", alt: "Foto áerea da Ilha do campeche." },
   /** IDs de analytics. Sem ID, NADA é carregado. Só rodam após consentimento. */
   analytics: {
     ga4: /^G-[A-Z0-9]{4,}$/.test(process.env.NEXT_PUBLIC_GA4_ID ?? "")
