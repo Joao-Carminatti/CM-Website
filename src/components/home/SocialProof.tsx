@@ -6,7 +6,7 @@ export function SocialProof() {
   if (depoimentos.length === 0 && indicadores.length === 0) return null;
   return (
     <section aria-labelledby="prova-social" className="page-width py-20 md:py-28">
-      <SectionHeading id="prova-social" title="Quem comprou com o Cleiton" />
+      <SectionHeading id="prova-social" title="O que dizem os clientes" />
       {indicadores.length > 0 && (
         <dl className="mt-10 grid gap-8 sm:grid-cols-3">
           {indicadores.map((i) => (

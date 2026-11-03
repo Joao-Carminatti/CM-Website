@@ -14,5 +14,16 @@ export interface Indicador {
   sufixo?: string;
 }
 
-export const depoimentos: Depoimento[] = [];
+export const depoimentos: Depoimento[] = [
+  {
+    nome: "Maria S.",
+    texto: "Texto do relato exatamente como o cliente autorizou.",
+    contexto: "Comprou um apartamento em Bairro X",
+  },
+  {
+    nome: "João P.",
+    texto: "Outro relato.",
+    contexto: "Vendeu uma casa em Bairro Y",
+  },
+];
 export const indicadores: Indicador[] = [];
