@@ -37,8 +37,8 @@ export default async function Home() {
       <FeaturedLaunches lancamentos={lancamentos} />
       <ProcessTimeline />
       <About />
-      <SocialProof />
       <SellBanner />
+      <SocialProof />
       <Faq />
       <QuickContact />
     </>
