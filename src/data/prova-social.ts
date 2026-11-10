@@ -31,5 +31,12 @@ export const depoimentos: Depoimento[] = [
     destaque: "conhecimento muito acima da média",
     contexto: "Investiu em um imóvel",
   },
+  {
+    nome: "Bibiana Marczyk dos Santos",
+    texto:
+      "Cleiton foi incansável em nos ajudar a encontrar um novo projeto que nos encantou ainda mais e, com muito trabalho, conseguiu exatamente o apto que gostamos. Quando as adversidades aparecem é que realmente conhecemos o bom profissional.",
+    destaque: "incansável",
+    contexto: "Comprou um apartamento em novo empreendimento",
+  },
 ];
 export const indicadores: Indicador[] = [];
