@@ -102,7 +102,7 @@ export function DepoimentosCarrossel({ itens }: { itens: Depoimento[] }) {
                   : "pointer-events-none translate-y-3 opacity-0"
               }`}
             >
-              <blockquote className="font-display text-3xl leading-snug font-light text-balance md:text-4xl lg:text-5xl">
+              <blockquote className="font-display text-2xl leading-snug font-light text-balance md:text-3xl lg:text-4xl">
                 “{comDestaque(d.texto, d.destaque)}”
               </blockquote>
               <figcaption className="text-mist text-sm tracking-[0.18em] md:text-base">

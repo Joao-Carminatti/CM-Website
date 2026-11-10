@@ -10,7 +10,7 @@ export const siteConfig = {
     "Imóveis à venda e lançamentos com atendimento próximo e transparente, da primeira conversa à escritura.",
   url: process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000",
   creci: "[CRECI]",
-  regiao: "[CIDADE/REGIÃO DE ATUAÇÃO]",
+  regiao: "Florianópolis e Grande Florianópolis",
   /** Apenas dígitos com DDI+DDD. Vazio = link do WhatsApp sem número. */
   whatsappNumero: process.env.NEXT_PUBLIC_WHATSAPP ?? "",
   whatsappExibicao: "[WHATSAPP]",

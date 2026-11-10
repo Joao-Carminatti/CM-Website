@@ -18,20 +18,18 @@ export interface Indicador {
 
 export const depoimentos: Depoimento[] = [
   {
-    nome: "Maria S.",
-    texto: "Texto do relato exatamente como o cliente autorizou.",
-    contexto: "Comprou um apartamento em Bairro X",
+    nome: "Sibelle Della Costa",
+    texto:
+      "Mais do que intermediar a negociação, esteve verdadeiramente envolvido em cada etapa. Sua comunicação é impecável, sempre clara, ágil e transparente. Transmitiu confiança, segurança e tranquilidade durante todo o processo. Recomendo de olhos fechados!",
+    destaque: "clara, ágil e transparente",
+    contexto: "Vendeu um apartamento na praia",
   },
   {
-    nome: "João P.",
-    texto: "Outro relato.",
-    contexto: "Vendeu uma casa em Bairro Y",
-  },
-  {
-    nome: "João Little",
-    texto: "Muito satisfeito com a compra da minha mansão com o cleiton, ele me ajudou em tudo e me deu ótimas dicas.",
-    destaque: "ótimas dicas",
-    contexto: "Comprou uma mansão no Bairro palhoça",
+    nome: "Bernardo Comandulle",
+    texto:
+      "O Cleiton demonstra um conhecimento muito acima da média sobre o mercado e as regiões em que atua. Apresentou diversas opções até encontrarmos o imóvel ideal, que se encaixava perfeitamente no meu orçamento e nas minhas expectativas. Já tenho meu corretor de confiança em Santa Catarina!",
+    destaque: "conhecimento muito acima da média",
+    contexto: "Investiu em um imóvel",
   },
 ];
 export const indicadores: Indicador[] = [];

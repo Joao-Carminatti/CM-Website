@@ -83,7 +83,7 @@ export default function TermosPage() {
         <h2>8. Foro e legislação</h2>
         <p>
           Estes termos seguem a legislação brasileira. Fica eleito o foro da comarca de{" "}
-          {siteConfig.regiao}. [REVISAR COM ADVOGADO]
+          Florianópolis/SC.
         </p>
       </section>
     </LegalPage>
