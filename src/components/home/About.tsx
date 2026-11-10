@@ -3,9 +3,9 @@ import { siteConfig } from "@/config/site";
 import { Monogram } from "@/components/ui/Monogram";
 
 const diferenciais = [
-  "Atendimento direto com o corretor, sem intermediários",
-  "Acompanhamento da primeira conversa até a escritura",
-  "Clareza sobre valores, prazos e condições em cada etapa",
+  "17 anos de atuação em Florianópolis e Grande Florianópolis",
+  "Lançamentos, imóveis na planta e imóveis prontos",
+  "Foco nas regiões Leste e Sul da Ilha",
 ];
 
 export function About() {
@@ -25,10 +25,13 @@ export function About() {
             id="sobre"
             className="font-display text-3xl leading-tight font-medium md:text-5xl"
           >
-            {siteConfig.nome}, {siteConfig.cargo.toLowerCase()}
+            {siteConfig.nome}, consultor imobiliário
           </h2>
           <p className="text-mist mt-5 text-lg">
-            [BIO DO CLEITON: 2 a 3 frases sobre trajetória e forma de trabalhar]
+            Com 17 anos de atuação no mercado imobiliário de Florianópolis e Grande
+            Florianópolis, Cleiton atende com abordagem consultiva e estratégica: parte
+            das necessidades de cada cliente para identificar as melhores oportunidades,
+            seja para morar ou para investir.
           </p>
           <p className="mt-4">
             <span className="text-mist">CRECI </span>
@@ -48,7 +51,7 @@ export function About() {
             href="/sobre"
             className="text-bronze mt-8 inline-block underline underline-offset-4"
           >
-            Conheça melhor o trabalho
+            Ler a bio completa.
           </Link>
         </div>
       </div>
