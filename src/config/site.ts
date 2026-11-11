@@ -12,9 +12,9 @@ export const siteConfig = {
   creci: "SC 20362",
   regiao: "Florianópolis e Grande Florianópolis",
   /** Apenas dígitos com DDI+DDD. Vazio = link do WhatsApp sem número. */
-  whatsappNumero: process.env.NEXT_PUBLIC_WHATSAPP ?? "",
-  whatsappExibicao: "[WHATSAPP]",
-  email: "[EMAIL]",
+  whatsappNumero: process.env.NEXT_PUBLIC_WHATSAPP ?? "5548999113142",
+  whatsappExibicao: "(48) 99911-3142",
+  email: "cleitonmolon@gmail.com",
   redes: {
     instagram: "", // ex.: https://instagram.com/usuario
     facebook: "",
