@@ -41,9 +41,12 @@ export interface Imovel {
 
 export interface Tipologia {
   nome: string;
-  area: number;
-  quartos: number;
-  vagas: number;
+  /** Metragem privativa: um número, ou [mínimo, máximo] quando varia. Opcional. */
+  area?: number | [number, number];
+  quartos?: number;
+  vagas?: number;
+  /** Linhas livres, ex.: ["4 suítes", "2 vagas"]. */
+  detalhes?: string[];
   aPartirDe?: number;
 }
 
@@ -62,7 +65,7 @@ export interface Lancamento {
   bairro: string;
   cidade: string;
   /** Previsão de entrega, ex.: "2028-12" */
-  entrega: string;
+  entrega?: string;
   aPartirDe?: number;
   tipologias: Tipologia[];
   plantas: Foto[];

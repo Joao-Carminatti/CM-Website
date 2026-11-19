@@ -4,9 +4,9 @@ import { notFound } from "next/navigation";
 import { siteConfig } from "@/config/site";
 import { getLancamento, getLancamentos } from "@/lib/data";
 import {
-  formatArea,
   formatEntrega,
   formatPreco,
+  resumoTipologia,
   rotulosStatusLancamento,
 } from "@/lib/format";
 import { buildWhatsAppLink } from "@/lib/whatsapp";
@@ -29,7 +29,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   if (!l) return { title: "Empreendimento não encontrado" };
   return {
     title: `${l.nome}: lançamento em ${l.bairro}`,
-    description: `${rotulosStatusLancamento[l.status]} em ${l.bairro}, ${l.cidade}. Entrega prevista: ${formatEntrega(l.entrega)}. Receba tabela e condições.`,
+    description: `${rotulosStatusLancamento[l.status]} em ${l.bairro}, ${l.cidade}.${l.entrega ? ` Entrega prevista: ${formatEntrega(l.entrega)}.` : ""} Receba tabela e condições.`,
     alternates: { canonical: `/lancamentos/${l.slug}` },
     robots: l.isDemo ? { index: false, follow: false } : undefined,
   };
@@ -69,7 +69,9 @@ export default async function LancamentoPage({ params }: Props) {
           <dl className="mt-8 flex flex-wrap gap-x-12 gap-y-4">
             <div>
               <dt className="text-mist text-sm">Entrega prevista</dt>
-              <dd className="font-display text-2xl">{formatEntrega(l.entrega)}</dd>
+              <dd className="font-display text-2xl">
+                {l.entrega ? formatEntrega(l.entrega) : "A confirmar"}
+              </dd>
             </div>
             <div>
               <dt className="text-mist text-sm">Valores</dt>
@@ -131,11 +133,9 @@ export default async function LancamentoPage({ params }: Props) {
               {l.tipologias.map((t) => (
                 <li key={t.nome} className="border-line rounded-lg border p-5">
                   <h3 className="font-display text-xl">{t.nome}</h3>
-                  <p className="text-stone mt-1 text-sm">
-                    {formatArea(t.area)} · {t.quartos}{" "}
-                    {t.quartos === 1 ? "quarto" : "quartos"} · {t.vagas}{" "}
-                    {t.vagas === 1 ? "vaga" : "vagas"}
-                  </p>
+                  {resumoTipologia(t) && (
+                    <p className="text-stone mt-1 text-sm">{resumoTipologia(t)}</p>
+                  )}
                   <p className="mt-3 font-medium">
                     {t.aPartirDe
                       ? `A partir de ${formatPreco(t.aPartirDe)}`

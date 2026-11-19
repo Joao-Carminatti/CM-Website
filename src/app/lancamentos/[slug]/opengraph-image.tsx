@@ -16,8 +16,11 @@ export default async function Image({ params }: { params: Promise<{ slug: string
   return renderOg({
     rotulo: `${rotulosStatusLancamento[l.status]} · ${l.bairro}`,
     titulo: l.nome,
-    rodape: l.aPartirDe
-      ? `A partir de ${formatPreco(l.aPartirDe)} · entrega ${formatEntrega(l.entrega)}`
-      : `Entrega prevista ${formatEntrega(l.entrega)}`,
+    rodape: [
+      l.aPartirDe ? `A partir de ${formatPreco(l.aPartirDe)}` : null,
+      l.entrega ? `Entrega prevista ${formatEntrega(l.entrega)}` : null,
+    ]
+      .filter(Boolean)
+      .join(" · "),
   });
 }

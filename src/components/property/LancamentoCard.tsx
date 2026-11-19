@@ -41,7 +41,9 @@ export function LancamentoCard({ lancamento }: { lancamento: Lancamento }) {
           </Link>
         </h3>
         <p className="text-stone text-sm">
-          Entrega prevista: {formatEntrega(lancamento.entrega)}
+          {lancamento.entrega
+            ? `Entrega prevista: ${formatEntrega(lancamento.entrega)}`
+            : "Entrega a confirmar"}
         </p>
         <p className="pt-1 text-lg font-semibold">
           {lancamento.aPartirDe
